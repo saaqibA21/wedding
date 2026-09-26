@@ -1,0 +1,9 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "description": "Luxury Mobile-First Wedding Invitation Website for S. Thanish Arafath and A. Fathima Luthufiya",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
