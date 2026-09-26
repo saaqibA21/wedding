@@ -34,10 +34,22 @@ const handler = (req, res) => {
   }
 
   const filePath = path.join(__dirname, reqUrl);
+  const ext = path.extname(filePath).toLowerCase();
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      // Fallback to index.html
+      // If it's an image or video asset missing from serverless bundle, redirect to global CDN
+      if (['.jpg', '.jpeg', '.png', '.mp4', '.svg', '.gif'].includes(ext)) {
+        const cdnUrl = `https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/${path.basename(filePath)}`;
+        res.writeHead(302, {
+          'Location': cdnUrl,
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end();
+        return;
+      }
+
+      // Fallback to index.html for page routes
       const indexPath = path.join(__dirname, 'index.html');
       fs.stat(indexPath, (err2, stats2) => {
         if (err2 || !stats2.isFile()) {
