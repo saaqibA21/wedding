@@ -900,13 +900,14 @@
       <video
         id="envelope-vid"
         class="hero-video"
-        src="wedding_video.mp4"
         poster="Digital_wedding_invitation_design_20260926180413.jpg"
         playsinline
         webkit-playsinline
         muted
         preload="auto"
         onclick="toggleVideo()">
+        <source src="wedding_video.mp4" type="video/mp4" />
+        <source src="https://raw.githubusercontent.com/saaqibA21/wedding/main/wedding_video.mp4" type="video/mp4" />
       </video>
 
       <div class="video-vignette"></div>
@@ -962,6 +963,7 @@
       <div class="ivory-gold-frame">
         <img
           src="Digital_wedding_invitation_design_20260926180413.jpg"
+          onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/saaqibA21/wedding/main/Digital_wedding_invitation_design_20260926180413.jpg';"
           alt="Wedding Invitation - S. Thanish Arafath with A Fathima Luthufiya" />
       </div>
       <div class="card-caption-text">✦ Sunday, the 3rd of January 2027 ✦</div>
