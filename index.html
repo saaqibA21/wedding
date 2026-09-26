@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Wedding Invitation | S. Thanish Arafath & A. Fathima Luthufiya</title>
+  
+  <!-- Fonts: Luxury Calligraphy & Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & LUXURY IVORY/GOLD/BURGUNDY THEME ─── */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      /* Theme inspired directly by the uploaded Wax Seal & Ivory Floral card */
+      --ivory-base: #fcf9f3;
+      --ivory-card: #f8f4ec;
+      --ivory-soft: #f2ebe0;
+      --ivory-deep: #eae0d0;
+      
+      --gold-metallic: #bca061;
+      --gold-light: #ebd8a7;
+      --gold-dark: #8c7132;
+      --gold-border: rgba(188, 160, 97, 0.45);
+      
+      --wax-burgundy: #6b1426;
+      --wax-deep: #4d0a18;
+      --wax-shadow: rgba(107, 20, 38, 0.4);
+      
+      --text-main: #33281e;
+      --text-sub: #6b5c4e;
+      --white: #ffffff;
+      
+      --font-script: 'Allura', 'Alex Brush', cursive;
+      --font-display: 'Playfair Display', serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', sans-serif;
+      --font-cinzel: 'Cinzel', serif;
+      --font-arabic: 'Amiri', serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: #f3ede2;
+      color: var(--text-main);
+      font-family: var(--font-serif);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Ambient background with embossed ivory floral tone */
+    body {
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(235, 216, 167, 0.4) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(235, 216, 167, 0.4) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    }
+
+    /* ─── MOBILE-FIRST PHONE CONTAINER ─── */
+    .mobile-wrapper {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100dvh;
+      background-color: var(--ivory-base);
+      position: relative;
+      box-shadow: 0 15px 60px rgba(77, 10, 24, 0.12), 0 0 0 1px var(--gold-border);
+    }
+
+    @media (min-width: 481px) {
+      body {
+        padding: 24px 0;
+      }
+      .mobile-wrapper {
+        border-radius: 36px;
+        overflow: hidden;
+      }
+    }
+
+    /* ─── FLOATING ROSE PETALS (BURGUNDY & IVORY WITH SOFT BLUR) ─── */
+    #petals-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* ─── SECTION 1: HERO VIDEO (9:16 ENVELOPE) ─── */
+    .hero-video-section {
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: env(safe-area-inset-top, 20px) 16px env(safe-area-inset-bottom, 24px);
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .video-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(35, 25, 15, 0.5) 0%,
+        rgba(0,0,0,0.05) 20%,
+        rgba(0,0,0,0.05) 55%,
+        rgba(252, 249, 243, 0.3) 75%,
+        rgba(252, 249, 243, 0.85) 90%,
+        var(--ivory-base) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Seamless Merge Fade at bottom of Hero Video (Dissolves video into ivory canvas) */
+    .hero-merge-fade {
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom,
+        rgba(252, 249, 243, 0) 0%,
+        rgba(252, 249, 243, 0.25) 25%,
+        rgba(252, 249, 243, 0.65) 55%,
+        rgba(252, 249, 243, 0.95) 85%,
+        var(--ivory-base) 100%);
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* Top Story Bar */
+    .story-top-bar {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+    }
+
+    .story-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid var(--gold-border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .story-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--wax-burgundy);
+      box-shadow: 0 0 10px var(--wax-burgundy);
+      animation: pulseDot 2s infinite;
+    }
+
+    .story-title {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .top-pill-btn {
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .top-pill-btn:active { transform: scale(0.92); }
+
+    /* Center Wax Seal Prompt (Burgundy with Intertwined Hearts) */
+    .center-open-prompt {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: auto;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .burgundy-wax-seal {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #8f1d34, var(--wax-burgundy), var(--wax-deep));
+      border: 2px solid var(--gold-light);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6), 0 0 35px var(--wax-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: waxPulse 2.3s infinite;
+    }
+
+    /* Intertwined gold double-heart icon */
+    .double-heart-icon {
+      font-size: 34px;
+      color: var(--gold-light);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .open-prompt-pill {
+      font-family: var(--font-cinzel);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--text-main);
+      text-transform: uppercase;
+      font-weight: 700;
+      background: rgba(252, 249, 243, 0.95);
+      padding: 8px 22px;
+      border-radius: 20px;
+      border: 1px solid var(--gold-metallic);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-bottom-text {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-couple-title {
+      font-family: var(--font-script);
+      font-size: 38px;
+      color: var(--gold-light);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+      line-height: 1;
+    }
+
+    .scroll-cue {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .scroll-cue::after {
+      content: '↓';
+      animation: bounceArrow 1.5s infinite;
+    }
+
+    /* ─── SECTION 2: THE INVITATION IMAGE REVEAL ─── */
+    .image-reveal-section {
+      padding: 48px 18px 36px;
+      background: linear-gradient(180deg, var(--ivory-soft) 0%, var(--ivory-base) 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--font-cinzel);
+      font-size: 26px;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    /* Embossed Ivory Frame with Gold Border */
+    .ivory-gold-frame {
+      position: relative;
+      background: var(--white);
+      padding: 12px;
+      border-radius: 22px;
+      box-shadow: 0 15px 50px rgba(77, 10, 24, 0.08), 0 0 0 1px var(--gold-border);
+      border: 1px solid rgba(188, 160, 97, 0.35);
+      margin: 0 auto;
+      max-width: 420px;
+    }
+
+    .ivory-gold-frame img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      display: block;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+    }
+
+    .card-caption-text {
+      font-family: var(--font-cinzel);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
+    /* ─── SECTION 3: WEDDING INFO (IN THE WEBSITE ITSELF) ─── */
+    .wedding-info-section {
+      padding: 36px 18px 56px;
+      background: var(--ivory-base);
+      text-align: center;
+      position: relative;
+    }
+
+    /* Embossed Ivory Card with Floral Bas-Relief Styling */
+    .embossed-parchment-card {
+      background: linear-gradient(180deg, #fdfbf7 0%, var(--ivory-card) 100%);
+      border: 1.5px solid var(--gold-metallic);
+      border-radius: 26px;
+      padding: 38px 20px;
+      box-shadow: 0 12px 40px rgba(77, 10, 24, 0.06), inset 0 0 40px rgba(255,255,255,0.8);
+      position: relative;
+    }
+
+    /* Double hairline gold framing */
+    .embossed-parchment-card::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(188, 160, 97, 0.35);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .arabic-bismillah {
+      font-family: var(--font-arabic);
+      font-size: 34px;
+      color: var(--gold-dark);
+      line-height: 1.4;
+      margin-bottom: 6px;
+      direction: rtl;
+    }
+
+    .bismillah-english {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+    }
+
+    .family-invitation-heading {
+      font-family: var(--font-cinzel);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .ceremony-script-title {
+      font-family: var(--font-script);
+      font-size: 44px;
+      color: var(--gold-dark);
+      margin: 4px 0 18px;
+      line-height: 1.1;
+    }
+
+    /* Quote bubble in embossed ivory */
+    .invitation-quote-box {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin: 16px 0 28px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .quote-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .quote-body {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Couple Names Box with Wax Seal Motif */
+    .couple-names-card {
+      background: var(--white);
+      border: 1.5px solid var(--gold-metallic);
+      border-radius: 20px;
+      padding: 30px 16px;
+      margin: 20px 0 24px;
+      box-shadow: 0 8px 30px rgba(188, 160, 97, 0.15);
+      position: relative;
+    }
+
+    .groom-name-cursive {
+      font-family: var(--font-script);
+      font-size: 48px;
+      color: var(--gold-dark);
+      line-height: 1;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+    }
+
+    .degree-pill {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .parentage-text {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-sub);
+      margin: 6px 0 14px;
+    }
+
+    .with-divider-text {
+      font-family: var(--font-script);
+      font-size: 32px;
+      color: var(--gold-dark);
+      margin: 4px 0;
+    }
+
+    .bride-name-cursive {
+      font-family: var(--font-script);
+      font-size: 48px;
+      color: var(--gold-dark);
+      line-height: 1;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+    }
+
+    .business-proprietor-line {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* Sculpted Wax Seal Stamp between sections */
+    .wax-seal-center-stamp {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #8f1d34, var(--wax-burgundy), var(--wax-deep));
+      border: 1.5px solid var(--gold-light);
+      box-shadow: 0 8px 25px var(--wax-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 24px auto;
+    }
+
+    .wedding-date-banner {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* Seamless Soft Merge Divider */
+    .merge-divider {
+      width: 75%;
+      max-width: 300px;
+      margin: 28px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      opacity: 0.6;
+    }
+    .merge-divider::before,
+    .merge-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-metallic), transparent);
+    }
+    .merge-divider-motif {
+      color: var(--gold-dark);
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+
+    /* ─── SECTION 4: EVENTS & VENUES (IVORY & GOLD CARDS) ─── */
+    .venues-section {
+      padding: 40px 18px 48px;
+      background: var(--ivory-base);
+      text-align: center;
+    }
+
+    .hijri-banner {
+      display: inline-block;
+      background: var(--white);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .venue-card-styled {
+      background: var(--white);
+      border: 1px solid var(--gold-border);
+      border-radius: 22px;
+      padding: 28px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+      box-shadow: 0 10px 35px rgba(77, 10, 24, 0.05);
+      position: relative;
+      border-left: 5px solid var(--wax-burgundy);
+    }
+
+    .venue-card-styled.valima-card {
+      border-left-color: var(--gold-metallic);
+    }
+
+    .ceremony-badge {
+      display: inline-block;
+      background: rgba(107, 20, 38, 0.08);
+      color: var(--wax-burgundy);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-family: var(--font-cinzel);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .ceremony-badge.gold-tag {
+      background: rgba(188, 160, 97, 0.15);
+      color: var(--gold-dark);
+    }
+
+    .venue-time-text {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .venue-date-text {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .venue-name-heading {
+      font-family: var(--font-cinzel);
+      font-size: 22px;
+      color: var(--text-main);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .venue-address-body {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-action-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 13px 12px;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-action-pill:active { transform: scale(0.96); }
+
+    .btn-maps-action {
+      background: linear-gradient(135deg, var(--wax-burgundy), var(--wax-deep));
+      color: #fff;
+      box-shadow: 0 4px 15px var(--wax-shadow);
+    }
+
+    .btn-copy-action {
+      background: var(--ivory-base);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+    }
+
+    /* ─── SECTION 5: LIVE COUNTDOWN (IVORY & GOLD) ─── */
+    .countdown-section-themed {
+      padding: 36px 18px 44px;
+      background: var(--ivory-base);
+      text-align: center;
+      border: none;
+    }
+
+    .cd-grid-themed {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .cd-box-themed {
+      background: var(--white);
+      border: 1px solid var(--gold-border);
+      border-radius: 14px;
+      padding: 16px 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .cd-number-styled {
+      font-family: var(--font-cinzel);
+      font-size: 28px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .cd-label-styled {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* ─── SECTION 6: SCHEDULE TIMELINE ─── */
+    .timeline-section-themed {
+      padding: 36px 18px 52px;
+      background: var(--ivory-base);
+    }
+
+    .timeline-list {
+      position: relative;
+      padding-left: 30px;
+      margin-top: 28px;
+    }
+
+    .timeline-list::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 10px; bottom: 10px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--wax-burgundy), var(--gold-metallic));
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 26px;
+    }
+
+    .step-marker {
+      position: absolute;
+      left: -26px; top: 4px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--wax-burgundy);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold-metallic);
+    }
+
+    .step-time {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--wax-burgundy);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* ─── SECTION 7: FOOTER & FAMILY BLESSINGS (NO RSVP) ─── */
+    .footer-themed {
+      padding: 44px 18px 84px;
+      background: var(--ivory-base);
+      text-align: center;
+      border: none;
+    }
+
+    .footer-arabic {
+      font-family: var(--font-arabic);
+      font-size: 26px;
+      color: var(--gold-dark);
+      margin-bottom: 8px;
+    }
+
+    .footer-compliments {
+      font-family: var(--font-cinzel);
+      font-size: 14px;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .footer-family-text {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--text-sub);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .footer-couple-script {
+      font-family: var(--font-script);
+      font-size: 40px;
+      color: var(--gold-dark);
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+
+    .footer-date-tag {
+      font-size: 11px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ─── FIXED BOTTOM APP-DOCK NAVIGATION ─── */
+    .bottom-dock-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      background: rgba(252, 249, 243, 0.95);
+      border-top: 1px solid var(--gold-border);
+      padding: 10px 16px env(safe-area-inset-bottom, 12px);
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .dock-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .dock-link span.icon { font-size: 18px; }
+    .dock-link:active { color: var(--wax-burgundy); }
+
+    /* ─── TOAST NOTIFICATION ─── */
+    #copy-toast {
+      position: fixed;
+      bottom: 75px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: var(--text-main);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes waxPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 25px var(--wax-shadow); }
+      50% { transform: scale(1.06); box-shadow: 0 12px 35px rgba(0,0,0,0.6), 0 0 45px var(--wax-shadow); }
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Rose Petals (Ivory Cream with Burgundy Tips) -->
+  <canvas id="petals-canvas"></canvas>
+
+  <div class="mobile-wrapper">
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 1: HERO VIDEO (9:16 ENVELOPE)
+         ══════════════════════════════════════════════════ -->
+    <section class="hero-video-section" id="hero-envelope">
+      <video
+        id="envelope-vid"
+        class="hero-video"
+        src="wedding_video.mp4"
+        poster="Digital_wedding_invitation_design_20260926180413.jpg"
+        playsinline
+        webkit-playsinline
+        muted
+        preload="auto"
+        onclick="toggleVideo()">
+      </video>
+
+      <div class="video-vignette"></div>
+
+      <!-- Top Story Bar -->
+      <div class="story-top-bar">
+        <div class="story-badge">
+          <div class="story-dot"></div>
+          <span class="story-title">Wedding Invitation</span>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <button class="top-pill-btn" id="audio-toggle-btn" onclick="toggleAudio()" title="Sound On/Off">
+            <span id="audio-icon">🔇</span>
+          </button>
+          <button class="top-pill-btn" onclick="replayVideo()" title="Replay">
+            ↺
+          </button>
+          <button class="top-pill-btn" onclick="scrollToInvite()" title="Skip">
+            ↓
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Wax Seal / Open Prompt (Burgundy with Double Hearts) -->
+      <div class="center-open-prompt" id="open-envelope-btn" onclick="openEnvelope()">
+        <div class="burgundy-wax-seal">
+          <span class="double-heart-icon">♥</span>
+        </div>
+        <div class="open-prompt-pill">Tap to Open Envelope</div>
+      </div>
+
+      <!-- Bottom Preview & Scroll Cue -->
+      <div class="hero-bottom-text" style="position: relative; z-index: 10;">
+        <div class="hero-couple-title" style="color: var(--gold-dark); text-shadow: 0 1px 3px rgba(255,255,255,0.7);">Thanish &amp; Fathima</div>
+        <div class="scroll-cue" style="color: var(--text-main);" onclick="scrollToInvite()">
+          Swipe / Scroll Down
+        </div>
+      </div>
+
+      <!-- Seamless Feathered Merge Overlay (Dissolves video into ivory canvas) -->
+      <div class="hero-merge-fade"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 2: INVITATION IMAGE REVEAL (SEAMLESS MERGE)
+         ══════════════════════════════════════════════════ -->
+    <section class="image-reveal-section" id="revealed-invitation" style="background: var(--ivory-base); margin-top: -15px; position: relative; z-index: 7;">
+      <span class="section-eyebrow">The Invitation</span>
+      <h2 class="section-heading">Cordially Invited</h2>
+
+      <!-- The Invitation Image with Gold Frame -->
+      <div class="ivory-gold-frame">
+        <img
+          src="Digital_wedding_invitation_design_20260926180413.jpg"
+          alt="Wedding Invitation - S. Thanish Arafath with A Fathima Luthufiya" />
+      </div>
+      <div class="card-caption-text">✦ Sunday, the 3rd of January 2027 ✦</div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 3: WEDDING INFO IN THE WEBSITE ITSELF
+         (MATCHING THE IVORY, GOLD & BURGUNDY WAX SEAL THEME)
+         ══════════════════════════════════════════════════ -->
+    <section class="wedding-info-section" id="invitation-details">
+      <div class="embossed-parchment-card">
+        <!-- Arabic Bismillah -->
+        <div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <div class="bismillah-english">In the name of Allah, the most Beneficent and the most Merciful</div>
+
+        <!-- Host Header -->
+        <div class="family-invitation-heading">
+          Mr. &amp; Mrs. A.K. SALEEM
+        </div>
+
+        <div class="ceremony-script-title">
+          Nikkah &amp; Valima Invitation
+        </div>
+
+        <!-- Invitation Quote -->
+        <div class="invitation-quote-box">
+          <div class="quote-title">
+            "Your name is in our heart"
+          </div>
+          <div class="quote-body">
+            You and Your family are cordially invited<br/>
+            to celebrate our family occasion
+          </div>
+        </div>
+
+        <!-- Couple Names in Gold & Ivory Frame -->
+        <div class="couple-names-card">
+          <div class="groom-name-cursive">
+            S. Thanish Arafath
+          </div>
+          <span class="degree-pill">M.B.A.</span>
+          <div class="parentage-text">Son of Mr. &amp; Mrs. A.K. Saleem</div>
+
+          <div class="with-divider-text">
+            with
+          </div>
+
+          <div class="bride-name-cursive">
+            A. Fathima Luthufiya
+          </div>
+          <span class="degree-pill">C.M.A., (USA)</span>
+          <div class="parentage-text" style="margin-bottom: 2px;">
+            D/o A.R. Mohamed Abdulla &amp; N. Nilofer
+          </div>
+          <div class="business-proprietor-line">
+            (Proprietor of King Cotton Waste, Chennai)
+          </div>
+        </div>
+
+        <!-- Burgundy Wax Seal Centerpiece Stamp -->
+        <div class="wax-seal-center-stamp">
+          <span style="font-size:26px;color:var(--gold-light);">♥</span>
+        </div>
+
+        <!-- Wedding Date -->
+        <div class="wedding-date-banner">
+          Sunday, the 3rd of January 2027<br/>
+          <span style="font-size:14px;color:var(--gold-dark);font-family:var(--font-sans);letter-spacing:1px;">(Hijri 1448 Rajab 25)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 4: EVENTS & VENUES
+         ══════════════════════════════════════════════════ -->
+    <section class="venues-section" id="venues-section">
+      <span class="section-eyebrow">Auspicious Occasion</span>
+      <h2 class="section-heading">Events &amp; Venues</h2>
+
+      <div class="hijri-banner">
+        Insha Allah on Sunday, 3rd Jan 2027 · (Hijri 1448 Rajab 25)
+      </div>
+
+      <!-- Venue 1: NIKKAH -->
+      <div class="venue-card-styled">
+        <span class="ceremony-badge">Sacred Ceremony</span>
+        <div class="venue-time-text">10:30 AM — 11:30 AM</div>
+        <div class="venue-date-text">Sunday, 3rd January 2027</div>
+        <h3 class="venue-name-heading">Anjuman Masjid</h3>
+        <p class="venue-address-body">
+          No: 16, Dr B.N. Reddy Road,<br/>
+          T. Nagar, Chennai - 600017
+        </p>
+
+        <div class="actions-grid">
+          <a
+            class="btn-action-pill btn-maps-action"
+            href="https://maps.google.com/?q=Anjuman+Masjid+Dr+BN+Reddy+Road+T+Nagar+Chennai"
+            target="_blank">
+            📍 Directions
+          </a>
+          <button
+            class="btn-action-pill btn-copy-action"
+            onclick="copyAddress('No: 16, Dr B.N. Reddy Road, T. Nagar, Chennai - 600017', 'Anjuman Masjid')">
+            📋 Copy Addr
+          </button>
+        </div>
+      </div>
+
+      <!-- Venue 2: VALIMA -->
+      <div class="venue-card-styled valima-card">
+        <span class="ceremony-badge gold-tag">Wedding Feast</span>
+        <div class="venue-time-text">Followed by Valima (12:30 PM Onwards)</div>
+        <div class="venue-date-text">Sunday, 3rd January 2027</div>
+        <h3 class="venue-name-heading">Parsi Club</h3>
+        <p class="venue-address-body">
+          32/7 West Madha Church Street,<br/>
+          Royapuram, Chennai - 600013
+        </p>
+
+        <div class="actions-grid">
+          <a
+            class="btn-action-pill btn-maps-action"
+            href="https://maps.google.com/?q=Parsi+Club+West+Madha+Church+Street+Royapuram+Chennai"
+            target="_blank">
+            📍 Directions
+          </a>
+          <button
+            class="btn-action-pill btn-copy-action"
+            onclick="copyAddress('32/7 West Madha Church Street, Royapuram, Chennai - 600013', 'Parsi Club')">
+            📋 Copy Addr
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soft Merge Divider -->
+    <div class="merge-divider"><span class="merge-divider-motif">✦ ❀ ✦</span></div>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 5: LIVE COUNTDOWN (IVORY & GOLD THEMED)
+         ══════════════════════════════════════════════════ -->
+    <section class="countdown-section-themed" id="countdown-section">
+      <span class="section-eyebrow">Counting Down</span>
+      <h2 class="section-heading" style="margin-bottom:0;">Until The Blessed Nikah</h2>
+
+      <div class="cd-grid-themed">
+        <div class="cd-box-themed">
+          <div class="cd-number-styled" id="timer-days">00</div>
+          <div class="cd-label-styled">Days</div>
+        </div>
+        <div class="cd-box-themed">
+          <div class="cd-number-styled" id="timer-hours">00</div>
+          <div class="cd-label-styled">Hours</div>
+        </div>
+        <div class="cd-box-themed">
+          <div class="cd-number-styled" id="timer-mins">00</div>
+          <div class="cd-label-styled">Mins</div>
+        </div>
+        <div class="cd-box-themed">
+          <div class="cd-number-styled" id="timer-secs">00</div>
+          <div class="cd-label-styled">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soft Merge Divider -->
+    <div class="merge-divider"><span class="merge-divider-motif">✦ ❀ ✦</span></div>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 6: DAY SCHEDULE TIMELINE
+         ══════════════════════════════════════════════════ -->
+    <section class="timeline-section-themed" id="schedule-section">
+      <span class="section-eyebrow">Order of Celebrations</span>
+      <h2 class="section-heading">Day Schedule</h2>
+
+      <div class="timeline-list">
+        <div class="timeline-step">
+          <div class="step-marker"></div>
+          <div class="step-time">10:00 AM</div>
+          <div class="step-title">Guest Arrival &amp; Welcome</div>
+          <div class="step-desc">Welcoming relatives &amp; guests at Anjuman Masjid, T. Nagar.</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-marker"></div>
+          <div class="step-time">10:30 AM — 11:30 AM</div>
+          <div class="step-title">The Sacred Nikkah</div>
+          <div class="step-desc">Solemnization of marriage, Dua, and elders' blessings.</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-marker"></div>
+          <div class="step-time">12:30 PM Onwards</div>
+          <div class="step-title">Valima Reception</div>
+          <div class="step-desc">Grand celebratory banquet feast at Parsi Club, Royapuram.</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-marker"></div>
+          <div class="step-time">Afternoon &amp; Evening</div>
+          <div class="step-title">Blessings &amp; Memories</div>
+          <div class="step-desc">Heartfelt Duas and memorable photographs with the couple.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soft Merge Divider -->
+    <div class="merge-divider"><span class="merge-divider-motif">✦ ❀ ✦</span></div>
+
+    <!-- ══════════════════════════════════════════════════
+         SECTION 7: FOOTER & FAMILY BLESSINGS (NO RSVP)
+         ══════════════════════════════════════════════════ -->
+    <footer class="footer-themed">
+      <div class="footer-arabic">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+      <div class="footer-compliments">With Best Compliments &amp; Warm Regards</div>
+      <div class="footer-family-text">From Family, Near &amp; Dear Friends &amp; Relatives</div>
+      <div class="footer-couple-script">Thanish &amp; Fathima</div>
+      <p class="footer-date-tag">Sunday, 3rd January 2027 · Chennai, India</p>
+    </footer>
+
+    <!-- ══════════════════════════════════════════════════
+         FIXED BOTTOM APP-DOCK NAVIGATION
+         ══════════════════════════════════════════════════ -->
+    <nav class="bottom-dock-nav">
+      <a href="#hero-envelope" class="dock-link">
+        <span class="icon">✉️</span>
+        <span>Invite</span>
+      </a>
+      <a href="#revealed-invitation" class="dock-link">
+        <span class="icon">🖼️</span>
+        <span>Card</span>
+      </a>
+      <a href="#venues-section" class="dock-link">
+        <span class="icon">📍</span>
+        <span>Venues</span>
+      </a>
+      <a href="#countdown-section" class="dock-link">
+        <span class="icon">⏱️</span>
+        <span>Timer</span>
+      </a>
+      <a href="#schedule-section" class="dock-link">
+        <span class="icon">📅</span>
+        <span>Schedule</span>
+      </a>
+    </nav>
+
+  </div><!-- /mobile-wrapper -->
+
+  <!-- Toast Notification -->
+  <div id="copy-toast">Address copied!</div>
+
+  <!-- ══════════════════════════════════════════════════
+       JAVASCRIPT
+       ══════════════════════════════════════════════════ -->
+  <script>
+    const vid = document.getElementById('envelope-vid');
+    const openBtn = document.getElementById('open-envelope-btn');
+    const audioIcon = document.getElementById('audio-icon');
+
+    // 1. Initial attempt: muted autoplay
+    window.addEventListener('DOMContentLoaded', () => {
+      vid.muted = true;
+      const playPromise = vid.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          openBtn.style.opacity = '0';
+          setTimeout(() => { openBtn.style.display = 'none'; }, 400);
+        }).catch(() => {
+          openBtn.style.display = 'flex';
+          openBtn.style.opacity = '1';
+        });
+      }
+    });
+
+    // 2. Open Envelope button
+    function openEnvelope() {
+      vid.muted = false;
+      vid.play().then(() => {
+        openBtn.style.opacity = '0';
+        setTimeout(() => { openBtn.style.display = 'none'; }, 300);
+        updateAudioButton();
+      }).catch(() => {
+        vid.muted = true;
+        vid.play().then(() => {
+          openBtn.style.opacity = '0';
+          setTimeout(() => { openBtn.style.display = 'none'; }, 300);
+          updateAudioButton();
+        });
+      });
+    }
+
+    // 3. Toggle playback on video tap
+    function toggleVideo() {
+      if (vid.paused) {
+        openEnvelope();
+      } else {
+        vid.pause();
+        openBtn.style.display = 'flex';
+        openBtn.style.opacity = '1';
+      }
+    }
+
+    // 4. Video Finished -> Smooth scroll to invitation image reveal
+    vid.addEventListener('ended', () => {
+      scrollToInvite();
+    });
+
+    function scrollToInvite() {
+      document.getElementById('revealed-invitation').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 5. Sound toggle
+    function toggleAudio() {
+      vid.muted = !vid.muted;
+      updateAudioButton();
+    }
+
+    function updateAudioButton() {
+      audioIcon.textContent = vid.muted ? '🔇' : '🔊';
+    }
+
+    // 6. Replay video
+    function replayVideo() {
+      document.getElementById('hero-envelope').scrollIntoView({ behavior: 'smooth' });
+      vid.currentTime = 0;
+      vid.play();
+      openBtn.style.display = 'none';
+    }
+
+    // 7. Copy Address
+    function copyAddress(text, name) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`Copied ${name} address!`);
+        }).catch(() => {
+          showToast(text);
+        });
+      } else {
+        showToast(text);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('copy-toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 2600);
+    }
+
+    // 8. Live Countdown (3 Jan 2027, 10:30 AM IST)
+    const weddingTimestamp = new Date('2027-01-03T10:30:00+05:30').getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = weddingTimestamp - now;
+
+      if (diff > 0) {
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById('timer-days').textContent = String(d).padStart(2, '0');
+        document.getElementById('timer-hours').textContent = String(h).padStart(2, '0');
+        document.getElementById('timer-mins').textContent = String(m).padStart(2, '0');
+        document.getElementById('timer-secs').textContent = String(s).padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 9. Floating Ivory & Burgundy Rose Petals (Matching the uploaded image)
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.size = Math.random() * 8 + 6;
+        this.speedY = Math.random() * 1.1 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.7;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 1.2;
+        this.opacity = Math.random() * 0.45 + 0.35;
+        // Ivory rose petals with burgundy/wine tipped gradient
+        const colors = [
+          'rgba(247, 240, 228, ', // ivory cream
+          'rgba(107, 20, 38, ',   // deep burgundy wine
+          'rgba(188, 160, 97, ',  // antique gold
+          'rgba(142, 32, 53, '    // ruby wine
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotSpeed;
+        if (this.y > canvas.height + 20) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size * 0.65, 0, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.opacity + ')';
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 24; i++) petals.push(new Petal());
+
+    function renderPetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      petals.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(renderPetals);
+    }
+    renderPetals();
+  </script>
+</body>
+</html>
