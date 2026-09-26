@@ -924,6 +924,7 @@
         id="envelope-vid"
         class="hero-video"
         poster="https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/Digital_wedding_invitation_design_20260926180413.jpg"
+        autoplay
         playsinline
         webkit-playsinline
         muted
@@ -947,13 +948,6 @@
         </button>
       </div>
 
-      <!-- Center Wax Seal / Open Prompt (Burgundy with Double Hearts) -->
-      <div class="center-open-prompt" id="open-envelope-btn" onclick="openEnvelope()">
-        <div class="burgundy-wax-seal">
-          <span class="double-heart-icon">♥</span>
-        </div>
-        <div class="open-prompt-pill">Tap to Open Envelope</div>
-      </div>
 
       <!-- Bottom Preview & Scroll Cue -->
       <div class="hero-bottom-text" style="position: relative; z-index: 10;">
@@ -1271,73 +1265,37 @@
     const vid = document.getElementById('envelope-vid');
     const openBtn = document.getElementById('open-envelope-btn');
 
-    // 1. Initial attempt: ready sound and prompt
+    // 1. Initial attempt: ready sound and autoplay video smoothly
     window.addEventListener('DOMContentLoaded', () => {
       if (!vid) return;
       vid.volume = 1.0;
       updateAudioButton();
 
-      // Try playing unmuted; if browser policy requires user gesture, keep wax seal visible
-      vid.muted = false;
+      // Autoplay: muted is supported across all browsers without restriction
+      vid.muted = true;
       const playPromise = vid.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          // Unmuted autoplay succeeded!
-          if (openBtn) {
-            openBtn.style.opacity = '0';
-            setTimeout(() => { openBtn.style.display = 'none'; }, 400);
-          }
           updateAudioButton();
-        }).catch(() => {
-          // Browser requires tap gesture for sound:
-          vid.muted = false;
-          if (openBtn) {
-            openBtn.style.display = 'flex';
-            openBtn.style.opacity = '1';
-          }
-          updateAudioButton();
+        }).catch((err) => {
+          console.warn('Autoplay waiting for interaction:', err);
         });
       }
     });
 
-    // 2. Open Envelope button (User Tap -> Sound ON & Video from start)
-    function openEnvelope() {
-      if (!vid) return;
-      vid.muted = false;
-      vid.volume = 1.0;
-      vid.currentTime = 0;
-      const playPromise = vid.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          if (openBtn) {
-            openBtn.style.opacity = '0';
-            setTimeout(() => { openBtn.style.display = 'none'; }, 300);
-          }
-          updateAudioButton();
-        }).catch((err) => {
-          console.warn('Playback gesture required:', err);
-          vid.muted = true;
-          vid.play().then(() => {
-            if (openBtn) {
-              openBtn.style.opacity = '0';
-              setTimeout(() => { openBtn.style.display = 'none'; }, 300);
-            }
-            updateAudioButton();
-          }).catch(() => {});
-        });
-      }
-    }
-
-    // 3. Toggle playback on video tap
+    // 2. Toggle playback on video tap (unmutes on tap if muted)
     function toggleVideo() {
       if (!vid) return;
       if (vid.paused) {
-        openEnvelope();
+        vid.play().then(() => updateAudioButton()).catch(() => {});
       } else {
-        vid.pause();
-        if (openBtn) {
-          openBtn.style.display = 'flex';
-          openBtn.style.opacity = '1';
+        if (vid.muted) {
+          vid.muted = false;
+          vid.volume = 1.0;
+          vid.currentTime = 0;
+          vid.play().then(() => updateAudioButton()).catch(() => {});
+        } else {
+          vid.pause();
         }
       }
     }
