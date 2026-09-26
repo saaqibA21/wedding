@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Wedding Invitation | S. Thanish Arafath & A. Fathima Luthufiya</title>
   
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>" />
+
   <!-- Fonts: Luxury Calligraphy & Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -900,14 +903,14 @@
       <video
         id="envelope-vid"
         class="hero-video"
-        poster="Digital_wedding_invitation_design_20260926180413.jpg"
+        poster="https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/Digital_wedding_invitation_design_20260926180413.jpg"
         playsinline
         webkit-playsinline
         muted
         preload="auto"
         onclick="toggleVideo()">
+        <source src="https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/wedding_video.mp4" type="video/mp4" />
         <source src="wedding_video.mp4" type="video/mp4" />
-        <source src="https://raw.githubusercontent.com/saaqibA21/wedding/main/wedding_video.mp4" type="video/mp4" />
       </video>
 
       <div class="video-vignette"></div>
@@ -962,8 +965,8 @@
       <!-- The Invitation Image with Gold Frame -->
       <div class="ivory-gold-frame">
         <img
-          src="Digital_wedding_invitation_design_20260926180413.jpg"
-          onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/saaqibA21/wedding/main/Digital_wedding_invitation_design_20260926180413.jpg';"
+          src="https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/Digital_wedding_invitation_design_20260926180413.jpg"
+          onerror="this.onerror=null; this.src='Digital_wedding_invitation_design_20260926180413.jpg';"
           alt="Wedding Invitation - S. Thanish Arafath with A Fathima Luthufiya" />
       </div>
       <div class="card-caption-text">✦ Sunday, the 3rd of January 2027 ✦</div>
@@ -1226,38 +1229,53 @@
 
     // 1. Initial attempt: muted autoplay
     window.addEventListener('DOMContentLoaded', () => {
+      if (!vid) return;
       vid.muted = true;
-      const playPromise = vid.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          openBtn.style.opacity = '0';
-          setTimeout(() => { openBtn.style.display = 'none'; }, 400);
-        }).catch(() => {
-          openBtn.style.display = 'flex';
-          openBtn.style.opacity = '1';
-        });
+      try {
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            openBtn.style.opacity = '0';
+            setTimeout(() => { openBtn.style.display = 'none'; }, 400);
+          }).catch(() => {
+            // Autoplay restricted: show tap to open button
+            openBtn.style.display = 'flex';
+            openBtn.style.opacity = '1';
+          });
+        }
+      } catch (err) {
+        openBtn.style.display = 'flex';
+        openBtn.style.opacity = '1';
       }
     });
 
     // 2. Open Envelope button
     function openEnvelope() {
+      if (!vid) return;
       vid.muted = false;
-      vid.play().then(() => {
-        openBtn.style.opacity = '0';
-        setTimeout(() => { openBtn.style.display = 'none'; }, 300);
-        updateAudioButton();
-      }).catch(() => {
-        vid.muted = true;
-        vid.play().then(() => {
+      const playPromise = vid.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
           openBtn.style.opacity = '0';
           setTimeout(() => { openBtn.style.display = 'none'; }, 300);
           updateAudioButton();
+        }).catch(() => {
+          vid.muted = true;
+          const fallbackPromise = vid.play();
+          if (fallbackPromise !== undefined) {
+            fallbackPromise.then(() => {
+              openBtn.style.opacity = '0';
+              setTimeout(() => { openBtn.style.display = 'none'; }, 300);
+              updateAudioButton();
+            }).catch(() => {});
+          }
         });
-      });
+      }
     }
 
     // 3. Toggle playback on video tap
     function toggleVideo() {
+      if (!vid) return;
       if (vid.paused) {
         openEnvelope();
       } else {
@@ -1278,20 +1296,29 @@
 
     // 5. Sound toggle
     function toggleAudio() {
+      if (!vid) return;
       vid.muted = !vid.muted;
       updateAudioButton();
     }
 
     function updateAudioButton() {
+      if (!vid) return;
       audioIcon.textContent = vid.muted ? '🔇' : '🔊';
     }
 
     // 6. Replay video
     function replayVideo() {
+      if (!vid) return;
       document.getElementById('hero-envelope').scrollIntoView({ behavior: 'smooth' });
       vid.currentTime = 0;
-      vid.play();
-      openBtn.style.display = 'none';
+      const playPromise = vid.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          openBtn.style.display = 'none';
+        }).catch(() => {
+          openBtn.style.display = 'flex';
+        });
+      }
     }
 
     // 7. Copy Address
