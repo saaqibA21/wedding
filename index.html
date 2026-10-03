@@ -774,46 +774,34 @@
       margin-top: 28px;
     }
 
-    /* Static background guideline */
+    /* Static background guideline (hidden per request) */
     .timeline-track-bg {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      bottom: 22px;
-      width: 2px;
-      background: linear-gradient(to bottom,
-        rgba(188, 160, 97, 0.22) 0%,
-        rgba(188, 160, 97, 0.32) 50%,
-        rgba(188, 160, 97, 0.18) 100%);
-      border-radius: 2px;
+      display: none;
     }
 
-    /* Dynamic moving progress bar on scroll */
+    /* Invisible traveler track - line hidden, only lotus floats */
     .timeline-progress-bar {
       position: absolute;
-      left: 9.5px;
-      top: 10px;
-      width: 3px;
+      left: 11.5px;
+      top: 11.5px;
+      width: 0;
       height: 0%;
       max-height: calc(100% - 32px);
-      background: linear-gradient(180deg,
-        var(--wax-burgundy) 0%,
-        #9e1b34 35%,
-        var(--gold-metallic) 80%,
-        #e5cd8d 100%);
-      border-radius: 3px;
-      box-shadow: 0 0 10px rgba(188, 160, 97, 0.75), 0 0 14px rgba(107, 20, 38, 0.45);
+      background: none !important;
+      box-shadow: none !important;
+      border: none !important;
       transition: height 0.08s ease-out;
       will-change: height;
-      z-index: 2;
+      z-index: 4;
+      pointer-events: none;
     }
 
     /* Lotus Flower Traveler on Timeline */
     .timeline-traveler {
       position: absolute;
-      left: 50%;
-      bottom: -18px;
-      transform: translateX(-50%);
+      left: 0;
+      top: 100%;
+      transform: translate(-50%, -50%);
       width: 44px;
       height: 34px;
       display: flex;
@@ -837,11 +825,11 @@
 
     @keyframes lotusBreathe {
       0%, 100% {
-        transform: translateX(-50%) scale(1) rotate(0deg);
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
         filter: drop-shadow(0 3px 8px rgba(107, 20, 38, 0.4)) drop-shadow(0 0 8px rgba(188, 160, 97, 0.5));
       }
       50% {
-        transform: translateX(-50%) scale(1.14) rotate(2deg);
+        transform: translate(-50%, -50%) scale(1.14) rotate(2deg);
         filter: drop-shadow(0 5px 14px rgba(107, 20, 38, 0.65)) drop-shadow(0 0 16px rgba(235, 216, 167, 0.9));
       }
     }
@@ -1427,7 +1415,7 @@
       <div class="footer-arabic">جَزَاكُمُ اللَّهُ خَيْرًا</div>
       <div class="footer-compliments">With Best Compliments &amp; Warm Regards</div>
       <div class="footer-family-text">From Family, Near &amp; Dear Friends &amp; Relatives</div>
-      <div class="footer-couple-script">Thanish &amp; Fathima</div>
+      <div class="footer-couple-script">Thanish &amp; Luthufia</div>
       <p class="footer-date-tag">Sunday, 3rd January 2027 · Chennai, India</p>
     </footer>
 
@@ -1734,10 +1722,12 @@
         const maxBarHeight = endOffsetInContainer - startOffsetInContainer;
         const currentHeightPx = progress * maxBarHeight;
 
+        progressBar.style.top = `${startOffsetInContainer}px`;
         progressBar.style.height = `${currentHeightPx}px`;
 
         if (traveler) {
-          traveler.style.opacity = progress > 0.01 ? '1' : '0';
+          const inScheduleView = (rect.top < windowHeight * 0.85 && rect.bottom > windowHeight * 0.15);
+          traveler.style.opacity = inScheduleView ? '1' : '0';
         }
 
         // Activate step milestones as the bar reaches them
