@@ -755,31 +755,41 @@
       z-index: 2;
     }
 
-    /* Glowing traveling orb at the tip of the moving bar */
+    /* Lotus Flower Traveler on Timeline */
     .timeline-traveler {
       position: absolute;
-      left: -4.5px;
-      bottom: -6px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f7ebc8 40%, var(--wax-burgundy) 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 0 12px rgba(188, 160, 97, 1), 0 0 18px rgba(107, 20, 38, 0.8), 0 2px 6px rgba(0,0,0,0.25);
+      left: 50%;
+      bottom: -18px;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       opacity: 0;
-      transition: opacity 0.3s ease;
-      animation: travelerPulse 1.8s infinite ease-in-out;
+      transition: opacity 0.35s ease;
       pointer-events: none;
+      z-index: 5;
+      filter: drop-shadow(0 3px 8px rgba(107, 20, 38, 0.45)) drop-shadow(0 0 10px rgba(188, 160, 97, 0.6));
+      animation: lotusBreathe 2.4s infinite ease-in-out;
     }
 
-    @keyframes travelerPulse {
+    .timeline-traveler img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: contrast(1.05) brightness(1.02);
+    }
+
+    @keyframes lotusBreathe {
       0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(188, 160, 97, 0.9), 0 0 16px rgba(107, 20, 38, 0.7);
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        filter: drop-shadow(0 3px 8px rgba(107, 20, 38, 0.4)) drop-shadow(0 0 8px rgba(188, 160, 97, 0.5));
       }
       50% {
-        transform: scale(1.3);
-        box-shadow: 0 0 16px rgba(235, 216, 167, 1), 0 0 24px rgba(107, 20, 38, 0.95);
+        transform: translateX(-50%) scale(1.14) rotate(2deg);
+        filter: drop-shadow(0 5px 14px rgba(107, 20, 38, 0.65)) drop-shadow(0 0 16px rgba(235, 216, 167, 0.9));
       }
     }
 
@@ -1253,7 +1263,12 @@
 
         <!-- Dynamic Moving Scroll-Driven Progress Timing Bar -->
         <div class="timeline-progress-bar" id="timeline-progress-bar">
-          <div class="timeline-traveler" id="timeline-traveler"></div>
+          <div class="timeline-traveler" id="timeline-traveler">
+            <img
+              src="lotus-marker.png"
+              onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/lotus-marker.png';"
+              alt="Lotus Milestone Marker" />
+          </div>
         </div>
 
         <div class="timeline-step">
