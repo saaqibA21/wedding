@@ -201,6 +201,18 @@
       object-position: center;
       z-index: 1;
       cursor: pointer;
+      transition: opacity 0.75s ease-in-out;
+    }
+
+    .hero-video-reveal {
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-video-reveal.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .video-vignette {
@@ -213,7 +225,7 @@
         rgba(252, 249, 243, 0.3) 75%,
         rgba(252, 249, 243, 0.85) 90%,
         var(--ivory-base) 100%);
-      z-index: 2;
+      z-index: 3;
       pointer-events: none;
     }
 
@@ -1083,6 +1095,20 @@
         <source src="wedding_video.mp4" type="video/mp4" />
       </video>
 
+      <!-- Palace Lake Animation (Plays seamlessly after wax seal opening) -->
+      <video
+        id="palace-vid"
+        class="hero-video hero-video-reveal"
+        playsinline
+        webkit-playsinline
+        muted
+        preload="auto"
+        onclick="toggleVideo()">
+        <source src="https://cdn.jsdelivr.net/gh/saaqibA21/wedding@main/palace_wedding_video.mp4" type="video/mp4" />
+        <source src="palace_wedding_video.mp4" type="video/mp4" />
+        <source src="gemini_generated_video_c7482f2d_1080p_20261003172757.mp4" type="video/mp4" />
+      </video>
+
       <div class="video-vignette"></div>
 
       <!-- Discrete Floating Gold Sound Toggle (matching theme) -->
@@ -1487,49 +1513,122 @@
        JAVASCRIPT
        ══════════════════════════════════════════════════ -->
   <script>
-    const vid = document.getElementById('envelope-vid');
-    const openBtn = document.getElementById('open-envelope-btn');
+    const envelopeVid = document.getElementById('envelope-vid');
+    const palaceVid = document.getElementById('palace-vid');
+    let isPalaceActive = false;
+    let transitionTriggered = false;
 
-    // 1. Initial attempt: ready sound and autoplay video smoothly
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!vid) return;
-      vid.volume = 1.0;
-      updateAudioButton();
+    // Transition threshold: when wax seal opens in wedding_video.mp4 (~2.7s)
+    const SEAL_OPEN_THRESHOLD = 2.7;
 
-      // Autoplay: muted is supported across all browsers without restriction
-      vid.muted = true;
-      const playPromise = vid.play();
+    function getActiveVideo() {
+      return (isPalaceActive && palaceVid) ? palaceVid : envelopeVid;
+    }
+
+    function transitionToPalaceVideo() {
+      if (transitionTriggered || !palaceVid) return;
+      transitionTriggered = true;
+      isPalaceActive = true;
+
+      // Carry over audio mute and volume state
+      if (envelopeVid) {
+        palaceVid.muted = envelopeVid.muted;
+        palaceVid.volume = envelopeVid.volume;
+      }
+      palaceVid.currentTime = 0;
+
+      const playPromise = palaceVid.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
+          palaceVid.classList.add('active');
           updateAudioButton();
-        }).catch((err) => {
-          console.warn('Autoplay waiting for interaction:', err);
+          setTimeout(() => {
+            if (envelopeVid && !envelopeVid.paused) {
+              envelopeVid.pause();
+            }
+          }, 850);
+        }).catch(err => {
+          console.warn('Palace video playback note:', err);
+          palaceVid.classList.add('active');
         });
-      }
-    });
-
-    // 2. Toggle playback on video tap (unmutes on tap if muted)
-    function toggleVideo() {
-      if (!vid) return;
-      if (vid.paused) {
-        vid.play().then(() => updateAudioButton()).catch(() => {});
       } else {
-        if (vid.muted) {
-          vid.muted = false;
-          vid.volume = 1.0;
-          vid.currentTime = 0;
-          vid.play().then(() => updateAudioButton()).catch(() => {});
-        } else {
-          vid.pause();
-        }
+        palaceVid.classList.add('active');
       }
     }
 
-    // 4. Video Finished -> Smooth scroll to invitation image reveal
-    if (vid) {
-      vid.addEventListener('ended', () => {
+    // 1. Initial attempt: ready sound and autoplay envelope video smoothly
+    window.addEventListener('DOMContentLoaded', () => {
+      if (envelopeVid) {
+        envelopeVid.volume = 1.0;
+        envelopeVid.muted = true;
+      }
+      if (palaceVid) {
+        palaceVid.volume = 1.0;
+        palaceVid.muted = true;
+      }
+      updateAudioButton();
+
+      if (envelopeVid) {
+        const playPromise = envelopeVid.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            updateAudioButton();
+          }).catch((err) => {
+            console.warn('Autoplay waiting for interaction:', err);
+          });
+        }
+      }
+    });
+
+    // Prime secondary video on first user interaction for smooth mobile playback
+    function primeSecondaryVideo() {
+      if (palaceVid && palaceVid.paused && !isPalaceActive) {
+        palaceVid.load();
+      }
+      window.removeEventListener('click', primeSecondaryVideo);
+      window.removeEventListener('touchstart', primeSecondaryVideo);
+    }
+    window.addEventListener('click', primeSecondaryVideo, { once: true, passive: true });
+    window.addEventListener('touchstart', primeSecondaryVideo, { once: true, passive: true });
+
+    // Track seal opening timing on envelope video
+    if (envelopeVid) {
+      envelopeVid.addEventListener('timeupdate', () => {
+        if (!transitionTriggered && envelopeVid.currentTime >= SEAL_OPEN_THRESHOLD) {
+          transitionToPalaceVideo();
+        }
+      });
+      envelopeVid.addEventListener('ended', () => {
+        if (!transitionTriggered) {
+          transitionToPalaceVideo();
+        }
+      });
+    }
+
+    // Palace video finishes -> Smooth scroll to invitation image reveal
+    if (palaceVid) {
+      palaceVid.addEventListener('ended', () => {
         scrollToInvite();
       });
+    }
+
+    // 2. Toggle playback on video tap (unmutes on tap if muted)
+    function toggleVideo() {
+      const activeVid = getActiveVideo();
+      if (!activeVid) return;
+      if (activeVid.paused) {
+        activeVid.play().then(() => updateAudioButton()).catch(() => {});
+      } else {
+        if (activeVid.muted) {
+          activeVid.muted = false;
+          if (envelopeVid) envelopeVid.muted = false;
+          if (palaceVid) palaceVid.muted = false;
+          activeVid.volume = 1.0;
+          updateAudioButton();
+        } else {
+          activeVid.pause();
+        }
+      }
     }
 
     function scrollToInvite() {
@@ -1539,21 +1638,26 @@
 
     // 5. Sound toggle (Clean Theme SVG)
     function toggleAudio() {
-      if (!vid) return;
-      vid.muted = !vid.muted;
-      if (!vid.muted && vid.paused) {
-        vid.play().catch(() => {});
+      const activeVid = getActiveVideo();
+      if (!activeVid) return;
+      const nextMuted = !activeVid.muted;
+      if (envelopeVid) envelopeVid.muted = nextMuted;
+      if (palaceVid) palaceVid.muted = nextMuted;
+
+      if (!nextMuted && activeVid.paused) {
+        activeVid.play().catch(() => {});
       }
       updateAudioButton();
     }
 
     function updateAudioButton() {
-      if (!vid) return;
+      const activeVid = getActiveVideo();
+      if (!activeVid) return;
       const audioSvg = document.getElementById('audio-svg-icon');
       const audioBtn = document.getElementById('audio-toggle-btn');
       if (!audioSvg) return;
 
-      if (vid.muted) {
+      if (activeVid.muted) {
         audioSvg.innerHTML = `
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="rgba(188,160,97,0.22)" stroke="#8c7132" stroke-width="1.8"></polygon>
           <line x1="22" y1="9" x2="16" y2="15" stroke="#6b1426" stroke-width="2.2" stroke-linecap="round"></line>
@@ -1572,10 +1676,19 @@
 
     // 6. Replay video
     function replayVideo() {
-      if (!vid) return;
-      document.getElementById('hero-envelope').scrollIntoView({ behavior: 'smooth' });
-      vid.currentTime = 0;
-      vid.play().catch(() => {});
+      const hero = document.getElementById('hero-envelope');
+      if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+      isPalaceActive = false;
+      transitionTriggered = false;
+      if (palaceVid) {
+        palaceVid.classList.remove('active');
+        palaceVid.pause();
+        palaceVid.currentTime = 0;
+      }
+      if (envelopeVid) {
+        envelopeVid.currentTime = 0;
+        envelopeVid.play().then(() => updateAudioButton()).catch(() => {});
+      }
     }
 
     // 7. Copy Address
